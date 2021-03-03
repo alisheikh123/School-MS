@@ -1,0 +1,71 @@
+﻿@model School_MS.Models.tblQuestion
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>tblQuestion</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="SubjectId" class="control-label"></label>
+                <select asp-for="SubjectId" class ="form-control" asp-items="ViewBag.SubjectId"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="Chaptertid" class="control-label"></label>
+                <select asp-for="Chaptertid" class ="form-control" asp-items="ViewBag.Chaptertid"></select>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionNo" class="control-label"></label>
+                <input asp-for="QuestionNo" class="form-control" />
+                <span asp-validation-for="QuestionNo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionName" class="control-label"></label>
+                <input asp-for="QuestionName" class="form-control" />
+                <span asp-validation-for="QuestionName" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="QuestionAnswer" class="control-label"></label>
+                <input asp-for="QuestionAnswer" class="form-control" />
+                <span asp-validation-for="QuestionAnswer" class="text-danger"></span>
+            </div>
+            @*<div class="form-group">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="VideoUrl" class="control-label"></label>
+                <input asp-for="VideoUrl" class="form-control" />
+                <span asp-validation-for="VideoUrl" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedDate" class="control-label"></label>
+                <input asp-for="CreatedDate" class="form-control" />
+                <span asp-validation-for="CreatedDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CreatedBy" class="control-label"></label>
+                <input asp-for="CreatedBy" class="form-control" />
+                <span asp-validation-for="CreatedBy" class="text-danger"></span>
+            </div>*@
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
