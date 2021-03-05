@@ -4,14 +4,20 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+<h4 class="text-center">All Questions Detail</h4>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Create" class="btn btn-primary btn-sm">Create New</a>
 </p>
 <table class="table">
     <thead>
         <tr>
+            <th>
+                Subject Name
+            </th>
+            <th>
+                Chapter No
+            </th>
             <th>
                 @Html.DisplayNameFor(model => model.QuestionNo)
             </th>
@@ -21,30 +27,20 @@
             <th>
                 @Html.DisplayNameFor(model => model.QuestionAnswer)
             </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ImageUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.VideoUrl)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedDate)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.CreatedBy)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tblSubject)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.tblChapter)
-            </th>
-            <th></th>
+
+
+            <th>Action</th>
         </tr>
     </thead>
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblSubject.SubjectName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.tblChapter.ChaptertName)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.QuestionNo)
             </td>
@@ -54,24 +50,8 @@
             <td>
                 @Html.DisplayFor(modelItem => item.QuestionAnswer)
             </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.VideoUrl)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.CreatedBy)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tblSubject.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.tblChapter.Id)
-            </td>
+
+
             <td>
                 <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
                 <a asp-action="Details" asp-route-id="@item.Id">Details</a> |

@@ -6,16 +6,18 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using School_MS.Data;
+using School_MS.IServices;
 using School_MS.Models;
 
 namespace School_MS.Controllers
 {
-    public class QuestionController : Controller
+    public class QuestionController : Controller, ISubject
     {
         private readonly ApplicationDbContext _context;
 
         public QuestionController(ApplicationDbContext context)
         {
+             
             _context = context;
         }
 
@@ -86,7 +88,7 @@ namespace School_MS.Controllers
                 return NotFound();
             }
             ViewData["Chaptertid"] = new SelectList(_context.tblChapter, "Id", "Id", tblQuestion.Chaptertid);
-            ViewData["SubjectId"] = new SelectList(_context.tblSubject, "Id", "Id", tblQuestion.SubjectId);
+            ViewData["SubjectId"] = new SelectList(_context.tblSubject, "Id", "SubjectName", tblQuestion.SubjectId);
             return View(tblQuestion);
         }
 
@@ -161,6 +163,16 @@ namespace School_MS.Controllers
         private bool tblQuestionExists(int id)
         {
             return _context.tblQuestion.Any(e => e.Id == id);
+        }
+
+        public IList<tblSubject> GetSubject()
+        {
+            throw new NotImplementedException();
+        }
+
+        public IList<tblChapter> GetChapter()
+        {
+            throw new NotImplementedException();
         }
     }
 }

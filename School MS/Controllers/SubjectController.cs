@@ -6,23 +6,27 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using School_MS.Data;
+using School_MS.IServices;
 using School_MS.Models;
 
 namespace School_MS.Controllers
 {
-    public class SubjectController : Controller
+    public class SubjectController : Controller,ISubject
     {
         private readonly ApplicationDbContext _context;
+    
 
         public SubjectController(ApplicationDbContext context)
         {
             _context = context;
+            
         }
 
         // GET: Subject
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            return View(await _context.tblSubject.ToListAsync());
+            var list = GetSubject();
+            return View(list);
         }
 
         // GET: Subject/Details/5
@@ -148,6 +152,17 @@ namespace School_MS.Controllers
         private bool tblSubjectExists(int id)
         {
             return _context.tblSubject.Any(e => e.Id == id);
+        }
+
+        public IList<tblSubject> GetSubject()
+        {
+            var Sub = _context.tblSubject.ToList();
+            return Sub;
+        }
+
+        public IList<tblChapter> GetChapter()
+        {
+            throw new NotImplementedException();
         }
     }
 }
