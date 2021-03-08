@@ -11,7 +11,7 @@ using School_MS.Models;
 
 namespace School_MS.Controllers
 {
-    public class QuestionController : Controller, ISubject
+    public class QuestionController : Controller
     {
         private readonly ApplicationDbContext _context;
 
@@ -23,10 +23,13 @@ namespace School_MS.Controllers
 
         // GET: Question
         public async Task<IActionResult> Index()
-        {
+        { 
             var applicationDbContext = _context.tblQuestion.Include(t => t.tblChapter).Include(t => t.tblSubject);
+            ViewData["Chaptertid"] = new SelectList(_context.tblChapter, "Id", "ChaptertName");
+            ViewData["SubjectId"] = new SelectList(_context.tblSubject, "Id", "SubjectName");
             return View(await applicationDbContext.ToListAsync());
         }
+   
 
         // GET: Question/Details/5
         public async Task<IActionResult> Details(int? id)
@@ -165,14 +168,27 @@ namespace School_MS.Controllers
             return _context.tblQuestion.Any(e => e.Id == id);
         }
 
-        public IList<tblSubject> GetSubject()
+       
+
+     
+        public JsonResult GetChapters(int id)
         {
-            throw new NotImplementedException();
+           
+            var chapters = new SelectList(_context.tblChapter.Where(x => x.SubjectID == id).Select(x=>new { x.Id,x.ChaptertName}).ToList(), "Id", "ChaptertName");
+
+
+                return Json(new { chapter = chapters });
         }
 
-        public IList<tblChapter> GetChapter()
+        [HttpPost]
+        public JsonResult GetQuestions(int subName, int chapterNam)
         {
-            throw new NotImplementedException();
+
+            var subjectDetail = _context.tblQuestion.Where(x=>x.Chaptertid==chapterNam).ToList();
+
+
+
+            return Json(new { chapter = subjectDetail });
         }
     }
 }
