@@ -68,6 +68,10 @@ namespace School_MS.Controllers
         {
             if (ModelState.IsValid)
             {
+               
+
+                tblQuestion.CreatedDate = DateTime.Now;
+                //tblQuestion.CreatedBy = User.Identity.Name.ToString();
                 _context.Add(tblQuestion);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
@@ -183,12 +187,36 @@ namespace School_MS.Controllers
         [HttpPost]
         public JsonResult GetQuestions(int subName, int chapterNam)
         {
+            //chapter id and sibject id 
+            var chapterid = _context.tblChapter.Where(x => x.Id == chapterNam).ToList();
+            var suibjectid = _context.tblSubject.Where(x => x.Id == subName).FirstOrDefault();
 
-            var subjectDetail = _context.tblQuestion.Where(x=>x.Chaptertid==chapterNam).ToList();
+            var subjectDetail = _context.tblQuestion.Where(x => x.Chaptertid == chapterNam).ToList();
 
 
 
             return Json(new { chapter = subjectDetail });
+        }
+        [HttpPost]
+        public JsonResult IsAlreadyExist(string QuestionNo)
+        {
+            bool status;
+            var chapterId = _context.tblQuestion.Where(x => x.QuestionNo == QuestionNo).Select(x => new { x.tblChapter.Id}).FirstOrDefault();
+            var subjectId = _context.tblQuestion.Where(x => x.QuestionNo == QuestionNo).Select(x => new { x.tblSubject.Id}).FirstOrDefault();
+            
+            if (chapterId != null)
+            {
+                //if (subjectId != null) {
+                    status = false;
+                //}
+                
+            }
+            else {
+                status = true;
+            }
+
+
+            return Json(status);
         }
     }
 }

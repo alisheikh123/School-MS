@@ -27,10 +27,11 @@
         </div>
         <div class="col-md-3">
             <div class="form-group">
-                <a class="btn btn-warning btn-sm getQues"  style="margin-top:35px;">Get Questions</a>
+                <a class="btn btn-warning btn-sm getQues" style="margin-top:35px;">Get Questions</a>
             </div>
-            </div>
-         </div>
+        </div>
+        <div id="result"></div>
+    </div>
 </p>
 
 <table class="table" id="myTable">
@@ -90,53 +91,60 @@
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
     <script>
-        $(document).ready(function () {
-            $('#myTable').DataTable();
-        });
-        $("#subject").change(function () {
-            var subId = $(this).val();
-            $.ajax({
-                method: "POST",
-                url: "/Question/GetChapters",
-                data: {
-                    id: subId
-                },
-                success: function (response) {
-                    debugger;
-                    let _html = "";
-                    for (var i = 0; i < response.chapter.length; i++) {
-                        _html += '<option value=' + response.chapter[i].value + '>' + response.chapter[i].text + '</option>';
-                    }
-                    
-                    $('#chapter').html(_html);
-                },
-                error: function () { }
-            });
-        });
+        //$(document).ready(function () {
+        //    $('#myTable').DataTable();
+        //});
+        //$("#subject").change(function () {
+        //    var subId = $(this).val();
+        //    $.ajax({
+        //        method: "POST",
+        //        url: "/Question/GetChapters",
+        //        data: {
+        //            id: subId
+        //        },
+        //        success: function (response) {
+        //            debugger;
+        //            let _html = "";
+        //            for (var i = 0; i < response.chapter.length; i++) {
+        //                _html += '<option value=' + response.chapter[i].value + '>' + response.chapter[i].text + '</option>';
+        //            }
 
-        $(".getQues").click(function () {
+        //            $('#chapter').html(_html);
+        //        },
+        //        error: function () { }
+        //    });
+        //});
 
-            var subjectName = $("#subject").val();
-            var chapterName = $("#chapter").val();
+        //$(".getQues").click(function () {
 
-            
+        //    var subjectName = $("#subject").val();
+        //    var chapterName = $("#chapter").val();
 
-            $.ajax({
-                method: "POST",
-                url: "/Question/GetQuestions",
-                data: {
-                    subName:subjectName,
-                    chapterNam:chapterName
 
-                },
-                success: function (chapter) {
-                    alert(chapter)
-                },
-                error: function (result) { }
 
-            });
-        });
+        //    $.ajax({
+        //        method: "POST",
+        //        url: "/Question/GetQuestions",
+        //        data: {
+        //            subName: subjectName,
+        //            chapterNam: chapterName
+
+        //        },
+        //        success: function (result) {
+        //            for (var i = 0; i <= result.chapter.length; i++) {
+        //                $("#result").append(result.chapter[i] + ": " + result.chapter[i] + '<br>');
+        //        }
+
+
+
+        //},
+        //    error: function (result) {
+        //        alert("error");
+        //    }
+
+        //        });
+        //    });
     </script>
-
+    <script src="~/js/site.js"></script>
 }
 

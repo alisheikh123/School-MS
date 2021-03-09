@@ -19,14 +19,14 @@
             <div class="form-group">
                 <label class="control-label">Subject</label>
 
-                <select asp-for="SubjectId" class="form-control" asp-items="ViewBag.SubjectId"></select>
+                <select asp-for="SubjectId" class="form-control" asp-items="ViewBag.SubjectId" id="subject"></select>
             </div>
         </div>
         <div class="col-md-3">
             <div class="form-group">
 
                 <label class="control-label">Chapter No</label>
-                <select asp-for="Chaptertid" class="form-control" asp-items="ViewBag.Chaptertid"></select>
+                <select asp-for="Chaptertid" class="form-control" asp-items="ViewBag.Chaptertid" id="chapter"></select>
             </div>
         </div>
         <div class="col-md-3">
@@ -91,4 +91,6 @@
 
 @section Scripts {
     @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+
+<script src="~/js/site.js"></script>
 }

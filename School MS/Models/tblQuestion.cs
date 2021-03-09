@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -15,6 +17,7 @@ namespace School_MS.Models
         public int? Chaptertid { get; set; }
         [Display(Name ="Question No")]
         [Required(ErrorMessage = "* Question No is Required")]
+        [Remote("IsAlreadyExist", "Question", HttpMethod = "POST", ErrorMessage = "Question No already exists in database.")]
         public string QuestionNo { get; set; }
         [Display(Name = "Question Name")]
         [Required(ErrorMessage = "* Question Name is Required")]
